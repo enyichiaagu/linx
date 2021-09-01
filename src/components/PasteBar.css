@@ -1,0 +1,24 @@
+.paste-bar {
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.enter img {
+    width: 2em;
+}
+
+.enter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: var(--secondary);
+}
+
+.input-bar {
+    border: 3px solid var(--secondary);
+}
+
+.enter, .input-bar {
+    padding: 0.5em;
+}

@@ -1,0 +1,24 @@
+.ghost-style {
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+}
+
+.danger-style {
+    background-color: var(--danger);
+    color: var(--white);
+    padding: calc(0.7em + 2px) 2em;
+}
+
+.normal-style {
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: calc(0.7em + 2px) 2em;
+}
+
+.no-bg-style {
+    color: var(--danger);
+}
+
+.full {
+    width: 100%;
+}
