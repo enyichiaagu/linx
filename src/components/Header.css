@@ -1,8 +1,6 @@
 header {
     background-color: var(--secondary);
-    min-height: 7vh;
-    height: 7vh;
-    max-height: 8vh;
+    min-height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
