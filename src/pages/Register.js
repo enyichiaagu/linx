@@ -50,12 +50,23 @@ function Register() {
     const register = () => {
         const { username, password, repeatPassword } = field
         if (username.length < 4 ) setError("Username should be more than 4 characters")
+        else if (username[0] !== username[0].toUpperCase() ) setError("Username should start with capital letters")
         else if (password.length < 6 ) setError("Password must be more than 6 characters")
         else if (password !== repeatPassword) setError("Passwords don't match")
         else setError("")
 
         if (!error) {
-            //fetch code here!!
+            fetch('https://linxserver.herokuapp.com/api/user/register', 
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    name: username,
+                    password: password
+                })
+            })
+            .then(response => response.json)
+            .then(response => console.log(response))
+            .catch(error => console.log('an error occured'))
         }
     }
 
