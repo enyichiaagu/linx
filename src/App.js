@@ -39,7 +39,7 @@ function App() {
   const newLinkSave = async () => {
     const postLink = async (token, title, url) => {
       try {
-          const response = await fetch('http://linxserver.herokuapp.com/api/link', 
+          const response = await fetch('https://linxserver.herokuapp.com/api/link', 
           {
               headers: {          
                   'Accept': 'application/json',
@@ -102,7 +102,7 @@ function App() {
     const run = async ()=> {
     const fetchUser = async (token) => {
       try {
-          const response = await fetch('http://linxserver.herokuapp.com/api/auth/', 
+          const response = await fetch('https://linxserver.herokuapp.com/api/auth/', 
           {
               headers: {          
                   'Accept': 'application/json',

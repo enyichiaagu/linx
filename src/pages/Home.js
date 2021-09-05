@@ -13,7 +13,7 @@ export default function Home({ setLinkSaved, setLinks, setLoggedIn, username, co
                 return setLoggedIn(false)
             }
             try {
-                const response = await fetch('http://linxserver.herokuapp.com/api/link', 
+                const response = await fetch('https://linxserver.herokuapp.com/api/link', 
                 {
                     headers: {          
                         'Accept': 'application/json',

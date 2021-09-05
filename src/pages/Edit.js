@@ -9,7 +9,7 @@ function Edit({ history, links, id, loggedIn, state, setState, setLinks, resetUr
     const linkEdit = async () => {
         const postLink = async (token, title) => {
           try {
-              const response = await fetch(`http://linxserver.herokuapp.com/api/link/${id}`, 
+              const response = await fetch(`https://linxserver.herokuapp.com/api/link/${id}`, 
               {
                   headers: {          
                       'Accept': 'application/json',

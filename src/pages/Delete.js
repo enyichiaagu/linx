@@ -10,7 +10,7 @@ function Delete({ links, id, loggedIn, setLinks, history }) {
     const linkDelete = async () => {
         const postLink = async (token) => {
           try {
-              const response = await fetch(`http://linxserver.herokuapp.com/api/link/${id}`, 
+              const response = await fetch(`https://linxserver.herokuapp.com/api/link/${id}`, 
               {
                   headers: {          
                       'Accept': 'application/json',
