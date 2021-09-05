@@ -7,8 +7,8 @@ function LinkList({ options, links, notClickable }) {
             {
                 links.map((link) => (
                     <Link 
-                        key={link.id}
-                        id={link.id} 
+                        key={link._id}
+                        id={link._id} 
                         title={link.title} 
                         url={link.url} 
                         options={options ? true : false}

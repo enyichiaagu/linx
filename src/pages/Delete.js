@@ -2,10 +2,32 @@ import React from 'react'
 import Button from '../components/Button'
 import Header from '../components/Header'
 import Link from '../components/Link'
+import { Redirect } from 'react-router-dom'
 
-function Delete({ links, id }) {
-    const entry = links.find(link => link.id === id)
-
+function Delete({ links, id, loggedIn, setLinks, history }) {
+    const entry = links.find(link => link._id === id)
+    console.log(entry)
+    const linkDelete = async () => {
+        const postLink = async (token) => {
+          try {
+              const response = await fetch(`http://linxserver.herokuapp.com/api/link/${id}`, 
+              {
+                  headers: {          
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                      'auth': token
+                  },
+                  method: "DELETE"
+              })
+              const message = await response.json()
+              return message;
+          } catch (error) {
+              return {error: "An error occurred!"}
+          }
+        }
+        postLink(localStorage.getItem('auth'))
+        history.push('/home')
+    }
     return (
         <div>
             <Header options/>
@@ -14,9 +36,10 @@ function Delete({ links, id }) {
                 <Link notClickable title={entry.title} url={entry.url}/>
                 <div style={{display: "flex", alignItems: "center", marginTop: "1em"}}>
                     <Button text="Back" type="ghost" style={{marginRight: "1em"}} goto="/options"/>
-                    <Button text="Delete" type="danger"/>
+                    <Button text="Delete" type="danger" onClick={linkDelete}/>
                 </div>
             </div>
+            { !loggedIn && <Redirect to={'/'}/> }
         </div>
     )
 }

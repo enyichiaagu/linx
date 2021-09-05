@@ -1,8 +1,9 @@
 import React from 'react'
 import Header from '../components/Header'
 import Button from '../components/Button'
+import { Redirect } from 'react-router-dom'
 
-function Landing() {
+function Landing({ loggedIn }) {
     return (
         <div>
             <Header/>
@@ -13,6 +14,7 @@ function Landing() {
                 <p className="paragraph" style={{textAlign: "center"}}>Don't have an account?</p>
                 <Button type="ghost" text="Register" full goto="register"/>
             </div>
+            { loggedIn && <Redirect to={'/home'} />}
         </div>
     )
 }

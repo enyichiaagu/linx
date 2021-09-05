@@ -6,7 +6,7 @@ function SavedLinks({ links }) {
         marginTop: "1em"
     }
     return (
-        links.length > 0 ? 
+        links && links.length > 0 ? 
         <div style={style}>
             <p className="label">Saved Links</p>
             <LinkList links={links}/>

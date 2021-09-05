@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import LinkForm from '../components/LinkForm'
+import { Redirect } from 'react-router-dom'
 
-function New({ url, nullifyRedirect, state, titleChange, urlChange, save }) {
+function New({ linkSaved, url, nullifyRedirect, state, titleChange, urlChange, save, loggedIn }) {
     useEffect(() => {
         nullifyRedirect()
     }) 
@@ -21,6 +22,8 @@ function New({ url, nullifyRedirect, state, titleChange, urlChange, save }) {
                     save={save}
                 />
             </div>
+            { linkSaved && <Redirect to={'/home'} />}
+            { !loggedIn && <Redirect to={'/'}/> }
         </div>
     )
 }

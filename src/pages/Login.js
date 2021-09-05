@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Button from '../components/Button'
 import Header from '../components/Header'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
-function Login() {
+function Login({ history, loggedIn, setLoggedIn, setUsername, setLinks }) {
     const [ field, setField ] = useState({
         username: "",
         password: ""
@@ -39,13 +39,60 @@ function Login() {
         
     }
 
-    const login = () => {
-        const { username, password} = field
+    const setToken = token => localStorage.setItem('auth', token)
+    
+    const fetchData = async (username, password) => {
+        try {
+            const response = await fetch('http://linxserver.herokuapp.com/api/auth/login', 
+            {
+                headers: {          
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    name: username,
+                    password: password
+                })
+            })
+            const message = await response.json()
+            return message;
+        } catch (error) {
+            return {error: "An error occurred!"}
+        }
+    }
+
+    const login = async () => {
+        setError("")
+        const { username, password } = field
         if (username.length < 4 ) setError("Username should be more than 4 characters")
+        else if (username[0] !== username[0].toUpperCase()) return setError("Username should start with capital letters")
         else if (password.length < 6 ) setError("Password must be more than 6 characters")
-        else setError("")
-        if (!error) {
-            //fetch code here!!
+        else {
+            const response = await fetchData(username, password)
+            if (response.credentials) setError("Wrong Username or Password")
+            else if (response.error) setError("An error occurred!")
+            else if (response.success) {
+                setLoggedIn(true)
+                setToken(response.auth)
+                setUsername(username)
+                console.log(response.auth)
+                console.log("Logged in oo")
+                history.push('/home')
+                fetch('https://linxserver.herokuapp.com/api/link/', {
+                    method: "GET",
+                    headers: {          
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'auth': response.auth
+                    }
+                })
+                .then(response => response.json())
+                .then(result=> {
+                    setLinks(result)
+                    console.log(result)
+                })
+            }
         }
     }
 
@@ -66,6 +113,7 @@ function Login() {
                 <Button type="normal" text="Login" full style={{marginTop: "1em"}} onClick={login}/>
                 <p className="paragraph">Don't have an account yet? <Link to="/register">Register</Link></p>
             </div>
+            {loggedIn && <Redirect to={'/home'}/>}
         </div>
     )
 }
