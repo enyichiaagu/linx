@@ -25,8 +25,13 @@ function Delete({ links, id, loggedIn, setLinks, history }) {
               return {error: "An error occurred!"}
           }
         }
-        postLink(localStorage.getItem('auth'))
-        history.push('/home')
+        const result = postLink(localStorage.getItem('auth'))
+        if (result.length > 0) {
+            setLinks(result)
+            history.push('/home')
+        } else {
+            console.log(error)
+        }
     }
     return (
         <div>
