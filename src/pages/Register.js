@@ -49,7 +49,7 @@ function Register({history, loggedIn}) {
 
     const fetchData = async (username, password) => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/register', 
+            const response = await fetch('https://linxserver.herokuapp.com/api/auth/register', 
             {
                 headers: {          
                     'Accept': 'application/json',

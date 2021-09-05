@@ -43,7 +43,7 @@ function Login({ history, loggedIn, setLoggedIn, setUsername, setLinks }) {
     
     const fetchData = async (username, password) => {
         try {
-            const response = await fetch('http://linxserver.herokuapp.com/api/auth/login', 
+            const response = await fetch('https://linxserver.herokuapp.com/api/auth/login', 
             {
                 headers: {          
                     'Accept': 'application/json',
