@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Trebuchet MS';
+    src: local('Trebuchet MS'), url('trebuc.woff') format('woff');
+}
+
 * {
     margin: 0;
     padding: 0;
