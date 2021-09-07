@@ -46,3 +46,37 @@ input {
 .error {
     color: var(--danger);
 }
+
+.boldtext {
+    font-size: 1.5em;
+}
+
+.bottom-margin {
+    margin-bottom: 3em;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 2em;
+    height: 2em;
+    margin: 3px;
+    border-radius: 50%;
+    border: 3px solid var(--secondary);
+    border-color: var(--secondary) transparent var(--secondary) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

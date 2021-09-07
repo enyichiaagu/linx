@@ -16,7 +16,7 @@ function New({ linkSaved, url, nullifyRedirect, state, titleChange, urlChange, s
                     editUrl 
                     url={url} 
                     forceTo="/home" 
-                    state={state} 
+                    state={state}
                     titleChange={titleChange} 
                     urlChange={urlChange} 
                     save={save}

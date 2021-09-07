@@ -1,6 +1,7 @@
 .ghost-style {
     border: 2px solid var(--secondary);
     color: var(--secondary);
+    background-color: none;
 }
 
 .danger-style {

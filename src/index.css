@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Trebuchet MS';
-    src: local('Trebuchet MS'), url('trebuc.woff') format('woff');
+    src: local('Trebuchet MS'), url('./trebuc.woff') format('woff');
 }
 
 * {

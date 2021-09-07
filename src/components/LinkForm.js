@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
 
 
-function LinkForm({ editUrl, url, entry, forceTo, state, titleChange, urlChange, save }) {
+function LinkForm({editUrl, url, entry, forceTo, state, titleChange, urlChange, save }) {
+    const [ error, setError ] = useState('')
+    const [ clicked, setClicked ] = useState(false)
+
+    const handleSubmit = () => {
+        setError('')
+        if (state.title && (state.url.length > 5 || entry.url)) {
+            setClicked(true);
+            save()
+        } else setError('Please fill in the fields correctly')
+    }
+
 
     return (
         <div>
@@ -24,10 +35,17 @@ function LinkForm({ editUrl, url, entry, forceTo, state, titleChange, urlChange,
                     <p>{entry.url}</p>
                 }
             </div>
-            <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: "1em"}}>
-                <Button text="Cancel" type="no-bg" style={{marginRight: "1em"}} goto={forceTo ? forceTo : "/options"}/>
-                <Button type="normal" text="Save" onClick={save}/>
-            </div>
+            <p className="paragraph error">{error}</p>
+            {
+            !clicked ?
+                <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: "1em"}}>
+                    <Button text="Cancel" type="no-bg" style={{marginRight: "1em"}} goto={forceTo ? forceTo : "/options"}/>
+                    <Button type="normal" text="Save" onClick={handleSubmit}/>
+                </div> :
+                <div style={{margin: '0 auto', width: 'fit-content'}}>
+                    <div className="lds-dual-ring"></div>
+                </div>
+            }
         </div>
     )
 }

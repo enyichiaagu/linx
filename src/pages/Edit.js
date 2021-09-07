@@ -46,7 +46,7 @@ function Edit({ history, links, id, loggedIn, state, setState, setLinks, resetUr
                 <Link to="/options">
                     <BackBar destination="Options"/>
                 </Link>
-                <LinkForm entry={entry} save={linkEdit} titleChange={titleChange}/>
+                <LinkForm title={state.title} entry={entry} save={linkEdit} titleChange={titleChange} state={state}/>
             </div>
             { !loggedIn && <Redirect to={'/'}/> }
         </div>

@@ -11,6 +11,7 @@ function Register({history, loggedIn}) {
     })
 
     const [ error, setError ] = useState('')
+    const [ clicked, setClicked ] = useState(false)
 
     const handleUsernameChange = (e) => {
         setField({
@@ -27,7 +28,6 @@ function Register({history, loggedIn}) {
         if (e.target.value[0] && e.target.value[0] !== e.target.value[0].toUpperCase()) {
             setError("Username should start with capital letters")
         }
-        console.log(field)
     }
 
     const handleUserPassword = (e) => {
@@ -76,10 +76,20 @@ function Register({history, loggedIn}) {
         else if (password.length < 6 ) return setError("Password must be more than 6 characters")
         else if (password !== repeatPassword) return setError("Passwords don't match")
         else {
+            setClicked(true)
             const response = await fetchData(username, password)
-            if (response.name) setError("Oops. Someone already has the name")
-            else if (response.error) setError("An error occurred. Try again.")
-            else if (response.user) history.push('/login')
+            if (response.name) {
+                setClicked(false)
+                setError("Oops. Someone already has the name")
+            }
+            else if (response.error) {
+                setClicked(false)
+                setError("An error occurred. Try again.")
+            }
+            else if (response.user) {
+                setClicked(false)
+                history.push('/login')
+            }
         }
     }
 
@@ -114,8 +124,15 @@ function Register({history, loggedIn}) {
                     />
                 </div>
                 <p className="paragraph error">{error}</p>
-                <Button type="normal" text="Register" full style={{marginTop: "1em"}} onClick={register}/>
-                <p className="paragraph">Already have an account? <Link to="/login">Login</Link></p>
+                {!clicked ?
+                <div>
+                    <Button type="normal" text="Register" full style={{marginTop: "1em"}} onClick={register}/>
+                    <p className="paragraph">Already have an account? <Link to="/login">Login</Link></p>
+                </div> :
+                <div style={{margin: '0 auto', width: 'fit-content'}}>
+                    <div className="lds-dual-ring"></div>
+                </div>
+                }
             </div>
             { loggedIn && <Redirect to={'/home'} />}
         </div>

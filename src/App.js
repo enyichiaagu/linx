@@ -12,7 +12,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 
 function App() {
-  const [ loggedIn, setLoggedIn ] = useState(true)
+  const [ loggedIn, setLoggedIn ] = useState()
   const [ url, setUrl ] = useState('')
   const [ newLinkState, setNewLinkState ] = useState({
     title: "",
@@ -25,7 +25,6 @@ function App() {
       title: e.target.value,
       url: newLinkState.url
     })
-    console.log(newLinkState)
   }
 
   const urlChange = (e) => {
@@ -33,7 +32,6 @@ function App() {
       title: newLinkState.title,
       url: e.target.value
     })
-    console.log(newLinkState)
   }
 
   const newLinkSave = async () => {
@@ -68,7 +66,6 @@ function App() {
       url: ""
     })
     setLinkSaved(true)
-    console.log(links)
   }
 
   const [ redirect, setRedirect ] = useState(false)
@@ -99,6 +96,8 @@ function App() {
   const resetUrl = () => setUrl("")
 
   useEffect(()=> {
+    if (localStorage.getItem('auth')) setLoggedIn(true)
+    else setLoggedIn(false)
     const run = async ()=> {
     const fetchUser = async (token) => {
       try {
@@ -132,11 +131,15 @@ function App() {
     run()
   },[])
 
+  const [ loaded, setLoaded ] = useState(false)
+
   return (
     <React.Fragment>
       <Switch>
         <Route exact path="/home">
           <Home 
+            loaded={loaded}
+            setLoaded={setLoaded}
             confirm={handleConfirm} 
             url={url} 
             change={handleUrlChange} 
@@ -208,7 +211,7 @@ function App() {
           path="/login" 
           render={
             ({history}) =>
-            <Login setLinks={setLinks} loggedIn={loggedIn} setLoggedIn={setLoggedIn} history={history} setUsername={setUsername}/>
+            <Login setLinks={setLinks} loggedIn={loggedIn} setLoggedIn={setLoggedIn} history={history} setUsername={setUsername} setLoaded={setLoaded}/>
           }/>
       </Switch>
       <Footer/>

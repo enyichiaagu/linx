@@ -5,7 +5,7 @@ import PasteBar from '../components/PasteBar'
 import SavedLinks from '../components/SavedLinks'
 import { Redirect } from 'react-router-dom'
 
-export default function Home({ setLinkSaved, setLinks, setLoggedIn, username, confirm, url, change, redirect, links, urlError, loggedIn }) {
+export default function Home({ loaded, setLoaded, setLinkSaved, setLinks, setLoggedIn, username, confirm, url, change, redirect, links, urlError, loggedIn }) {
     useEffect(() => {
         setLinkSaved(false)
         const fetchLinks = async (token = localStorage.getItem('auth')) => {
@@ -23,23 +23,31 @@ export default function Home({ setLinkSaved, setLinks, setLoggedIn, username, co
                     method: "GET"
                 })
                 const message = await response.json()
-                console.log(message)
                 setLinks(message)
+                setLoaded(true)
             } catch (error) {
-                return {error: "An error occurred!"}
+                setLoaded(true)
             }
         }
         fetchLinks()
-    },[setLinks, setLoggedIn, setLinkSaved])
+    },[setLinks, setLoggedIn, setLinkSaved, setLoaded])
 
     return (
         <div>
             <Header options/>
             <div className="main">
-                <Greeting name={username}/>
-                <PasteBar confirm={confirm} url={url} change={change} redirect={redirect}/>
-                <p className="paragraph error" style={{ paddingBottom: 0}}>{urlError}</p>
-                <SavedLinks links={links}/>
+                {
+                    loaded ? 
+                    <div>
+                        <Greeting name={username}/>
+                        <PasteBar confirm={confirm} url={url} change={change} redirect={redirect}/>
+                        <p className="paragraph error" style={{ paddingBottom: 0}}>{urlError}</p>
+                        <SavedLinks links={links}/>
+                    </div> :
+                    <div style={{margin: '0 auto', width: 'fit-content', paddingTop: '1em'}}>
+                        <div className="lds-dual-ring"></div>
+                    </div>
+                }
             </div>
             { !loggedIn && <Redirect to={'/'}/> }
         </div>
