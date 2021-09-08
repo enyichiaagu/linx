@@ -29,7 +29,7 @@ function Delete({ links, id, loggedIn, setLinks, history }) {
           }
         }
         const result = await postLink(localStorage.getItem('auth'))
-        if (result.length > -1) {
+        if (result.length >= 0) {
             setClicked(false)
             setLinks(result)
             history.push('/home')
