@@ -12,7 +12,7 @@ function Footer() {
 
     return (
         <div style={style}>
-            <p>Made with {"<3"} by Enyichi A. Agu</p>
+            <p>Made with ❤️ by Enyichi A. Agu</p>
         </div>
     )
 }
