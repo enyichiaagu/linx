@@ -12,7 +12,7 @@ function Link({ id, title, url, options, notClickable }) {
             {
                 !notClickable &&
                 <div style={{marginRight: '1em'}}>
-                    <img src={`https://api.faviconkit.com/${faviconLink}/50`} alt="logo" height="45px"/>
+                    <img src={`https://api.faviconkit.com/${faviconLink}/45`} alt="logo" height="45px"/>
                 </div> 
             }
             <div>
