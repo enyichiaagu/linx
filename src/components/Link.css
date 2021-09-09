@@ -6,6 +6,8 @@
     background-color: var(--white);
     padding: 0.5em 1em;
     margin: 0.4em 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .svg-style {
