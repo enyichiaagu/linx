@@ -14,7 +14,7 @@ body {
 .main {
     max-width: 650px;
     margin: 0 auto;
-    min-height: 86vh;
+    min-height: calc(93vh-40px);
     padding: 0 0.5em;
     padding-bottom: 10em;
 }
